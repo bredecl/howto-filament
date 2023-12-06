@@ -69,3 +69,53 @@ you can publish the resource to your project
 ```bash
 php artisan filament-user:publish
 ```
+```bash
+composer require tapp/filament-authentication-log:"^3.0"
+php artisan vendor:publish --provider="Rappasoft\LaravelAuthenticationLog\LaravelAuthenticationLogServiceProvider" --tag="authentication-log-migrations"
+composer require torann/geoip
+php artisan migrate
+php artisan vendor:publish --provider="Rappasoft\LaravelAuthenticationLog\LaravelAuthenticationLogServiceProvider" --tag="authentication-log-views"
+php artisan vendor:publish --provider="Rappasoft\LaravelAuthenticationLog\LaravelAuthenticationLogServiceProvider" --tag="authentication-log-config"
+php artisan vendor:publish --tag="filament-authentication-log-translations"
+php artisan vendor:publish --tag="filament-authentication-log-config"
+```
+
+
+#Using the Resource
+Add this plugin to a panel on plugins() method. E.g. in `app/Providers/Filament/AdminPanelProvider.php`:
+```php
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // ...
+        ->plugins([
+            FilamentAuthenticationLogPlugin::make(),
+            //...
+        ]);
+}
+```
+That's it! Now you can see the Authentication Log resource on left sidebar.
+
+
+
+
+You must add the `AuthenticationLoggable` and `Notifiable` traits to the models you want to track.
+```php
+use Illuminate\Notifications\Notifiable;
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+ 
+class User extends Authenticatable
+{
+    use Notifiable, AuthenticationLoggable;
+
+    use HasRoles;
+}
+```
+
+## Erores:
+
+This cache store does not support tagging.
+editar `.env` cambiar CACHE_DRIVER a CACHE_DRIVER=Array
