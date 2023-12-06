@@ -1,1 +1,52 @@
 # howto-filament
+
+```bash
+composer create-project laravel/laravel .
+composer require filament/filament:"^3.0-stable" -W
+php artisan filament:install --panels
+```
+ingresa el nombre del panel
+
+[configura el .env]
+
+```bash
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan optimize:clear
+php artisan migrate
+```
+
+```bash
+composer require bezhansalleh/filament-shield
+```
+Add the Spatie\Permission\Traits\HasRoles trait to your User model(s):
+```php
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+
+class User extends Authenticatable
+{
+    use HasRoles;
+
+    // ...
+}
+```
+
+Publish the config file then setup your configuration:
+```bash
+php artisan vendor:publish --tag=filament-shield-config
+```
+Register the plugin for the Filament Panels you want
+```php
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+        ]);
+}
+```
+Now run the following command to install shield:
+```bash
+php artisan shield:install
+```
