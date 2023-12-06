@@ -116,6 +116,9 @@ class User extends Authenticatable
 }
 ```
 
+editar config/geoip.php:
+  'cache_tags' => [],
+
 ## Erores:
 
 This cache store does not support tagging.
