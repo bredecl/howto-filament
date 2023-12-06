@@ -21,7 +21,7 @@ composer require bezhansalleh/filament-shield
 ```
 Add the Spatie\Permission\Traits\HasRoles trait to your User model(s):
 ```php
-use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
