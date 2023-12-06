@@ -50,3 +50,22 @@ Now run the following command to install shield:
 ```bash
 php artisan shield:install
 ```
+You can install the package via composer:
+```bash
+composer require 3x1io/filament-user
+```
+Publish Translation and config
+```bash
+php artisan vendor:publish --tag="filament-user-config"
+php artisan vendor:publish --tag="filament-user-translations"
+```
+and now clear cache
+```bash
+php artisan optimize:clear
+```
+Publish Resource
+you can publish the resource to your project
+
+```bash
+php artisan filament-user:publish
+```
