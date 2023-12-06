@@ -70,6 +70,7 @@ you can publish the resource to your project
 php artisan filament-user:publish
 ```
 ```bash
+composer require rappasoft/laravel-authentication-log
 composer require tapp/filament-authentication-log:"^3.0"
 php artisan vendor:publish --provider="Rappasoft\LaravelAuthenticationLog\LaravelAuthenticationLogServiceProvider" --tag="authentication-log-migrations"
 composer require torann/geoip
